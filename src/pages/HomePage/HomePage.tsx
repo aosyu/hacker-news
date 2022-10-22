@@ -20,7 +20,7 @@ const HomePage = () => {
         // eslint-disable-next-line
     }, [])
 
-    return <Stack gap={"1rem"} m={"auto"}>
+    return <Stack gap={"1rem"}>
         {stories && stories.map(
             (story, key) => <StoryPreview story={story} key={key}/>
         )}

@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
 import StoryPage from "../pages/StoryPage/StoryPage";
-import {createTheme, responsiveFontSizes, Stack, ThemeProvider} from "@mui/material";
+import {Box, createTheme, responsiveFontSizes, Stack, ThemeProvider} from "@mui/material";
 import {appRoutesNames} from "../utils/constants/constants";
 import MainHeader from "../components/MainHeader";
 
@@ -31,7 +31,10 @@ let theme = createTheme({
         borderRadius: 10
     },
     palette: {
-        divider: "gainsboro"
+        divider: "gainsboro",
+        secondary: {
+            main: "#C58F76"
+        }
     },
 })
 
@@ -41,14 +44,23 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <Stack m={"1rem"} alignItems={"center"} gap={2}>
-                    <MainHeader/>
-                    <Switch>
-                        <Redirect from="/" to={appRoutesNames.HOME} exact/>
-                        <Route path={appRoutesNames.HOME} component={HomePage}/>
-                        <Route path={`${appRoutesNames.STORIES}/:storyId`} component={StoryPage}/>
-                    </Switch>
-                </Stack>
+                <Box sx={{background: {md: "black"}}} display={"flex"} justifyContent={"center"} minHeight={"105vh"}>
+                    <Stack p={{xs: "1rem", md: "3rem"}}
+                           sx={{
+                               background: "white",
+                               width: {xs: "100%", md: "1000px"},
+                           }}
+                           gap={2}
+                           width={"1000px"}
+                           minWidth={"300px"}>
+                        <MainHeader/>
+                        <Switch>
+                            <Redirect from="/" to={appRoutesNames.HOME} exact/>
+                            <Route path={appRoutesNames.HOME} component={HomePage}/>
+                            <Route path={`${appRoutesNames.STORIES}/:storyId`} component={StoryPage}/>
+                        </Switch>
+                    </Stack>
+                </Box>
             </BrowserRouter>
         </ThemeProvider>
     )
