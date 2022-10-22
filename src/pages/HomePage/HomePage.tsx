@@ -1,13 +1,29 @@
 import {Stack} from "@mui/material";
-import {Link} from "react-router-dom";
-import appRoutesNames from "../../utils/constants/appRoutesNames";
+import {useEffect} from "react";
+import {UPDATE_TIMEOUT} from "../../utils/constants/constants";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {getTopStories} from "../../redux/stories/thunkActions";
+import StoryPreview from "../../components/StoryPreview";
 
 const HomePage = () => {
-    return <Stack>
-        <Link to={appRoutesNames.HOME}>Home</Link>
-        <Link to={`${appRoutesNames.NEWS}/${0}`}>News 0</Link>
-        <Link to={`${appRoutesNames.NEWS}/${1}`}>News 1</Link>
-        <Link to={`${appRoutesNames.NEWS}/${2}`}>News 2</Link>
+    const dispatch = useAppDispatch()
+
+    const stories = useAppSelector(state => state.storiesReducer.stories)
+
+    const getStories = () => dispatch(getTopStories()).unwrap()
+
+    useEffect(() => {
+        getStories()
+        const interval = setInterval(getStories, UPDATE_TIMEOUT)
+
+        return () => clearInterval(interval)
+        // eslint-disable-next-line
+    }, [])
+
+    return <Stack gap={"1rem"} m={"auto"}>
+        {stories && stories.map(
+            (story, key) => <StoryPreview story={story} key={key}/>
+        )}
     </Stack>
 }
 
