@@ -1,28 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getStoryById, getTopStories} from "./thunkActions";
+import {ItemView} from "../items/ItemView";
 
-export const STORIES_ACTION_TYPE_PREFIX = 'stories'
-
-export interface StoryView {
-    id: number,
-    title: string,
-    score: number,
-    by: string,
-    time: number,
-
-    url: string,
-    descendants: number,
-    kids: string[]
-}
+export const STORIES_ACTION_TYPE_PREFIX = "stories"
 
 interface StoriesState {
-    stories: StoryView[],
-    currentStory: StoryView | undefined,
+    stories: ItemView[],
+    currentStory: ItemView | undefined,
 }
 
 const init: StoriesState = {
     stories: [],
-    currentStory: undefined
+    currentStory: undefined,
 }
 
 const storiesSlice = createSlice({

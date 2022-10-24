@@ -5,26 +5,32 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {getStoryById} from "../../redux/stories/thunkActions";
 import {CenteredLoader} from "../../components/styled/CenteredLoader";
 import StoryPreview from "../../components/StoryPreview";
+import {getComments} from "../../redux/items/thunkActions";
+import Comment from "../../components/Comment";
+import {clearAll} from "../../redux/comments/commentsSlice";
 
 const StoryPage = () => {
     const {storyId} = useParams<{ storyId: string }>()
 
     const dispatch = useAppDispatch()
 
+    useEffect(() => {
+        dispatch(clearAll())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     const story = useAppSelector(state => state.storiesReducer.currentStory)
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
-
-    // const parseLink = (link: string) => {
-    //     return link.substring(link.lastIndexOf(".", link.lastIndexOf(".") - 1) + 1).split("/")[0];
-    // }
 
     // TODO :: isLoading from state
     useEffect(() => {
         if (!storyId) return
 
         setIsLoading(true)
-        dispatch(getStoryById(Number(storyId))).unwrap()
+        dispatch(getStoryById(Number(storyId)))
+            .unwrap()
+            .then(story => dispatch(getComments({parentId: Number(storyId), ids: story.kids})))
             .then(() => setIsLoading(false))
         // TODO :: error handling
     }, [dispatch, storyId])
@@ -46,7 +52,7 @@ const StoryPage = () => {
 
         <Typography variant={"caption"}>Comments: {story.descendants}</Typography>
 
-        {story.kids.toString()}
+        {story.kids.map((id, key) => <Comment id={id} key={key}/>)}
     </Stack>
 }
 

@@ -1,11 +1,11 @@
-import {StoryView} from "../redux/stories/storiesSlice";
 import React from "react";
 import {Box, Typography, useTheme} from "@mui/material";
 import {appRoutesNames} from "../utils/constants/constants";
 import {StyledLink} from "./styled/StyledLink";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import {ItemView} from "../redux/items/ItemView";
 
-const StoryPreview: React.FC<{ story: StoryView }> = ({story}) => {
+const StoryPreview: React.FC<{ story: ItemView }> = ({story}) => {
     const theme = useTheme()
 
     return <Box>
