@@ -20,6 +20,7 @@ let theme = createTheme({
             fontFamily: "georgia, times new roman, times, serif",
             fontWeight: "bold",
             fontSize: "medium",
+            color: "#2B2B2B"
         },
         caption: {
             textTransform: "uppercase",
@@ -31,7 +32,8 @@ let theme = createTheme({
             fontFamily: "nyt-franklin,helvetica,arial,sans-serif"
         },
         subtitle1: {
-            fontWeight: "bold"
+            fontWeight: "bold",
+            color: "#2B2B2B"
         },
         button: {
             fontSize: "medium",
@@ -45,7 +47,7 @@ let theme = createTheme({
         divider: "gainsboro",
         secondary: {
             main: "#C58F76"
-        }
+        },
     },
 })
 
@@ -57,7 +59,7 @@ function App() {
             <BrowserRouter>
                 <Box display={"flex"} justifyContent={"flex-start"} minHeight={"105vh"} flexDirection={"column"}>
                     <MainHeader/>
-                    <Stack m={"2rem"}
+                    <Stack m={"1.5rem"}
                            sx={{
                                background: "white",
                                width: {xs: `calc(100% - 3rem)`, md: "1000px"},

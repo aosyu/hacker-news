@@ -39,7 +39,16 @@ const Comment: React.FC<{ id: string }> = ({id}) => {
         <Typography variant={"subtitle1"}>{comment.by}</Typography>
 
         {/* TODO :: handle undefined values*/}
-        {comment.text && <Typography variant={"subtitle2"}>{parse(comment.text)}</Typography>}
+        {comment.text && <Typography
+            sx={{
+                "& *": {
+                    overflow: "auto",
+                    display: "block"
+                }
+            }}
+            variant={"subtitle2"}>
+            {parse(comment.text)}
+        </Typography>}
 
         {comment.kids &&
             (comment.childrenHidden

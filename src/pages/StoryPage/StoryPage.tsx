@@ -1,4 +1,4 @@
-import {Divider, Link, Stack, Typography} from "@mui/material";
+import {Box, Link, Stack, Typography} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
@@ -40,15 +40,17 @@ const StoryPage = () => {
     }
 
     return <Stack gap={1}>
-        <StoryPreview story={story}/>
+        <Box sx={{
+            background: "whitesmoke",
+            padding: "1rem",
+            marginBottom: "1rem",
+        }}>
+            <StoryPreview story={story}/>
 
-        <Divider/>
-
-        <Typography variant={"caption"}>
-            Link: <Link href={story.url}>{story.url}</Link>
-        </Typography>
-
-        <Divider/>
+            <Typography variant={"caption"}>
+                <Link href={story.url} sx={{color: "#0000EE"}}>Link</Link>
+            </Typography>
+        </Box>
 
         <Typography variant={"caption"}>Comments: {story.descendants}</Typography>
 
