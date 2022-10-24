@@ -1,22 +1,21 @@
-import {Box, Typography, useTheme} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import React from "react";
 import {appRoutesNames} from "../utils/constants/constants";
 import {StyledLink} from "./styled/StyledLink";
 // import ReplayIcon from '@mui/icons-material/Replay';
 
 const MainHeader = () => {
-    const theme = useTheme()
-
     return <Box sx={{
         display: "flex",
         justifyContent: "center",
+        backgroundColor: "secondary.light",
+        color: "white",
         width: "100%",
-        borderTop: `3px solid ${theme.palette.divider}`,
-        borderBottom: `3px solid ${theme.palette.divider}`,
+        padding: "0.8rem 0 0.8rem 0",
         alignItems: "center"
     }}>
         <StyledLink to={appRoutesNames.HOME}>
-            <Typography variant={"h1"} m={1}>Hacker news</Typography>
+            <Typography variant={"h1"} m={1} color={"white"}>Hacker news</Typography>
         </StyledLink>
         {/*<ReplayIcon fontSize={"large"}/>*/}
     </Box>

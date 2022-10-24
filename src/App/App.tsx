@@ -55,16 +55,17 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <Box sx={{background: {md: "black"}}} display={"flex"} justifyContent={"center"} minHeight={"105vh"}>
-                    <Stack p={{xs: "1rem", md: "3rem"}}
+                <Box display={"flex"} justifyContent={"flex-start"} minHeight={"105vh"} flexDirection={"column"}>
+                    <MainHeader/>
+                    <Stack m={"2rem"}
                            sx={{
                                background: "white",
-                               width: {xs: "100%", md: "1000px"},
+                               width: {xs: `calc(100% - 3rem)`, md: "1000px"},
                            }}
+                           alignSelf={"center"}
                            gap={2}
                            width={"1000px"}
                            minWidth={"300px"}>
-                        <MainHeader/>
                         <Switch>
                             <Redirect from="/" to={appRoutesNames.HOME} exact/>
                             <Route path={appRoutesNames.HOME} component={HomePage}/>
