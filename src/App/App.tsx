@@ -10,7 +10,7 @@ import MainHeader from "../components/MainHeader";
 let theme = createTheme({
     spacing: (factor: number) => `${0.5 * factor}rem`,
     typography: {
-        fontFamily: "Montserrat, sans-serif",
+        fontFamily: "georgia, times new roman, times, serif",
         h1: {
             fontFamily: "georgia, times new roman, times, serif",
             fontSize: "3rem",
@@ -25,6 +25,17 @@ let theme = createTheme({
             textTransform: "uppercase",
             fontFamily: "nyt-franklin,helvetica,arial,sans-serif",
             color: "#727272"
+        },
+        subtitle2: {
+            color: "#727272",
+            fontFamily: "nyt-franklin,helvetica,arial,sans-serif"
+        },
+        subtitle1: {
+            fontWeight: "bold"
+        },
+        button: {
+            fontSize: "medium",
+            fontFamily: "nyt-franklin,helvetica,arial,sans-serif",
         }
     },
     shape: {
