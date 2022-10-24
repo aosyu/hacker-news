@@ -48,7 +48,7 @@ const StoryPage = () => {
             <StoryPreview story={story}/>
 
             <Typography variant={"caption"}>
-                <Link href={story.url}>{story.url}</Link>
+                <Link href={story.url}>Link</Link>
             </Typography>
         </Box>
 
