@@ -1,11 +1,12 @@
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Button, LinearProgress, Typography} from "@mui/material";
 import React, {useCallback} from "react";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {commentsAdapter} from "../redux/comments/commentsSlice";
+import {commentsAdapter, setChildrenHidden} from "../redux/comments/commentsSlice";
 import {RootState} from "../redux/store";
 import {getComments} from "../redux/items/thunkActions";
 import parse from "html-react-parser";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Comment: React.FC<{ id: string }> = ({id}) => {
     const dispatch = useAppDispatch()
@@ -15,10 +16,20 @@ const Comment: React.FC<{ id: string }> = ({id}) => {
     const comment = useAppSelector(state => commentsSelectors.selectById(state, id))
 
     const subComments = useCallback(() => {
-            if (!comment) return <></>
+            if (!comment || !comment.kids) return <></>
             return comment.kids.map((childId, key) => <Comment key={key} id={childId}/>)
         }, [comment]
     )
+
+    const onShowMoreClick = () => {
+        if (!comment) return
+        dispatch(setChildrenHidden({commentId: Number(id), value: false}))
+        dispatch(getComments({parentId: comment.id, ids: comment.kids}))
+    }
+
+    const onHideClick = () => {
+        dispatch(setChildrenHidden({commentId: Number(id), value: true}))
+    }
 
     if (!comment) {
         return <></>
@@ -30,15 +41,27 @@ const Comment: React.FC<{ id: string }> = ({id}) => {
         {/* TODO :: handle undefined values*/}
         {comment.text && <Typography variant={"subtitle2"}>{parse(comment.text)}</Typography>}
 
-        {/* TODO :: handle undefined values*/}
-        {comment.kids && <>
-            <Button startIcon={<ArrowDropUpIcon/>}
-                    onClick={() => dispatch(getComments({parentId: comment.id, ids: comment.kids}))}>
-                show more
-            </Button>
+        {comment.kids &&
+            (comment.childrenHidden
+                ?
+                <Button startIcon={<ArrowDropDownIcon/>}
+                        onClick={comment.childrenHidden ? onShowMoreClick : onHideClick}>
+                    {comment.childrenHidden ? "more" : "hide"}
+                </Button>
+                :
+                <Button startIcon={<ArrowDropUpIcon/>}
+                        onClick={comment.childrenHidden ? onShowMoreClick : onHideClick}>
+                    {comment.childrenHidden ? "show more" : "hide"}
+                </Button>)
+        }
 
-            <Box marginLeft={"3rem"}>{subComments()} </Box>
-        </>}
+        {comment.isLoading
+            ?
+            <LinearProgress color={"secondary"} sx={{m: "0.5rem"}}/>
+            :
+            // TODO :: handle undefined values
+            <>{!comment.childrenHidden && <Box marginLeft={"3rem"}>{subComments()} </Box>}</>
+        }
     </Box>
 }
 

@@ -1,4 +1,4 @@
-export interface ItemView {
+export type ItemView = {
     // TODO :: add all fields
 
     // TODO :: handle deleted and dead items
