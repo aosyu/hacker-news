@@ -8,7 +8,7 @@ const MainHeader = () => {
     return <Box sx={{
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "secondary.light",
+        backgroundColor: "primary.dark",
         color: "white",
         width: "100%",
         padding: "0.8rem 0 0.8rem 0",

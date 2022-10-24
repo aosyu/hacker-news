@@ -45,8 +45,13 @@ let theme = createTheme({
     },
     palette: {
         divider: "gainsboro",
+        primary: {
+            dark: "#2B2D42",
+            main: "#AA1155",
+            light: "#EDF2F4"
+        },
         secondary: {
-            main: "#C58F76"
+            main: "#AA1155",
         },
     },
 })

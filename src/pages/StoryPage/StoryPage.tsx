@@ -41,14 +41,14 @@ const StoryPage = () => {
 
     return <Stack gap={1}>
         <Box sx={{
-            background: "whitesmoke",
-            padding: "1rem",
+            borderBottom: "3px solid gainsboro",
+            paddingBottom: "1rem",
             marginBottom: "1rem",
         }}>
             <StoryPreview story={story}/>
 
             <Typography variant={"caption"}>
-                <Link href={story.url} sx={{color: "#0000EE"}}>Link</Link>
+                <Link href={story.url}>{story.url}</Link>
             </Typography>
         </Box>
 
