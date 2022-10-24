@@ -52,7 +52,7 @@ const StoryPage = () => {
 
         <Typography variant={"caption"}>Comments: {story.descendants}</Typography>
 
-        {story.kids.map((id, key) => <Comment id={id} key={key}/>)}
+        {story.kids?.map((id, key) => <Comment id={id} key={key}/>)}
     </Stack>
 }
 
