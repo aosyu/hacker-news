@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deploy:
+[hacker-news-aosyu.vercel.app](https://hacker-news-aosyu.vercel.app/home)
+
 ## Building:
 
 Install dependencies:
